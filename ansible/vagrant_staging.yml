@@ -7,4 +7,5 @@
     - { role: geerlingguy.mysql, tags: mysql }
     - { role: geerlingguy.ntp, tags: ntp }
     - { role: geerlingguy.git, tags: git }
+    - { role: geerlingguy.composer, tags: composer }
 

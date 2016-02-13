@@ -5,7 +5,7 @@ project_name: "ansible-docker-paper"
 site_fqdn: "{{ project_name }}.de"
 
 base_path: "/var/www"
-site_path: "{{ base_path }}/{{ site_fqdn }}"
+site_path: "{{ base_path }}/{{ project_name }}"
 
 db_name: "{{ project_name }}"
 db_host: "localhost"
@@ -18,12 +18,12 @@ db_root_password: "123456"
 ############
 deploy_web_user: "www-data"
 deploy_web_group: "www-data"
-deploy_tmp_path: "/tmp/{{ site_fqdn }}"
+deploy_tmp_path: "/tmp/{{ project_name }}"
 deploy_repository: "https://github.com/slipke/ansible-docker-paper.git"
 deploy_version: "master"
 deploy_archive_file: "archive.tar"
 deploy_code_dir: "code"
-deploy_composer_enabled: no
+deploy_composer_enabled: yes
 deploy_cleanup_items: []
 deploy_shared_directories: []
 deploy_writeable_directories: []

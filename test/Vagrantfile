@@ -11,6 +11,10 @@ Vagrant.configure('2') do |config|
 
     staging_config.vm.provision 'ansible' do |ansible|
       ansible.playbook = '../ansible/vagrant_staging.yml'
+      ansible.groups = {
+        "staging" => ["staging"],
+        "production" => ["production"]
+      }
     end
   end
 
@@ -22,6 +26,10 @@ Vagrant.configure('2') do |config|
 
     production_config.vm.provision 'ansible' do |ansible|
       ansible.playbook = '../ansible/vagrant_production.yml'
+      ansible.groups = {
+        "staging" => ["staging"],
+        "production" => ["production"]
+      }
     end
   end
 end

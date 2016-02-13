@@ -1,4 +1,4 @@
-staging.ansible-docker-paper.de ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/simonlipke/Documents/ansible-docker-paper/test/.vagrant/machines/staging/virtualbox/private_key'
+staging.ansible-docker-paper.de ansible_ssh_host=192.168.33.80 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/simonlipke/Documents/ansible-docker-paper/test/.vagrant/machines/staging/virtualbox/private_key'
 
 [staging]
 staging.ansible-docker-paper.de
