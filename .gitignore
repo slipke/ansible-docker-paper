@@ -1,0 +1,14 @@
+# IDE
+.idea/
+
+# Code
+#/code/
+
+# Docker
+/docker/logs/
+
+# Vagrant
+/test/.vagrant/
+
+# Ansible
+/ansible/roles/

@@ -1,0 +1,76 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Initialize the deploy root and gather facts
+      deploy_helper:
+        path: "{{ site_path }}"
+
+    - name: Create new release path
+      file: path={{ deploy_helper.new_release_path }} state=directory owner={{ deploy_web_user }} group={{ deploy_web_group }}
+
+    - name: Check if tmp folder exists
+      file: path={{ deploy_tmp_path }} state=directory
+
+    - name: Clone the application into tmp folder
+      git:
+        repo: "{{ deploy_repository }}"
+        dest: "{{ deploy_tmp_path }}"
+        version: "{{ deploy_version }}"
+        accept_hostkey: yes
+
+    - name: Archive code directory
+      command: /usr/bin/git archive -o {{ deploy_archive_file }} --format=tar HEAD:{{ deploy_code_dir }}
+      args:
+        chdir: "{{ deploy_tmp_path }}"
+
+    - name: Unarchive code into release path
+      unarchive: src={{ deploy_tmp_path }}/{{ deploy_archive_file }} dest={{ deploy_helper.new_release_path }} copy=no
+
+    - name: Install dependencies with composer
+      composer: command=install working_dir={{ deploy_helper.new_release_path }}
+      when: deploy_composer_enabled
+
+    - name: Remove tmp dir
+      file: path={{ deploy_tmp_path }} state=absent
+
+    - name: Remove files from the repository that aren't needed for the production
+      file:
+        path: "{{ deploy_helper.new_release_path }}/{{ item }}"
+        state: absent
+      with_items: "{{ deploy_cleanup_items }}"
+      when: deploy_cleanup_items
+
+    - name: Create shared folders if not existant
+      file:
+        path: "{{ deploy_helper.shared_path }}/{{ item }}"
+        state: directory
+      with_items: "{{ deploy_shared_directories }}"
+      when: deploy_shared_directories
+
+    - name: Add symlinks from the new release to the shared folder
+      file:
+        path: "{{ deploy_helper.new_release_path }}/{{ item }}"
+        src: "{{ deploy_helper.shared_path }}/{{ item }}"
+        state: link
+      with_items: "{{ deploy_shared_directories }}"
+      when: deploy_shared_directories
+
+    - name: Create the writable directories
+      file:
+        path: "{{ deploy_helper.new_release_path }}/{{ item }}"
+        state: directory
+        mode: 0775
+      with_items: "{{ deploy_writeable_directories }}"
+      when: deploy_writeable_directories
+
+    - name: Fix permissions
+      file: path={{ deploy_helper.new_release_path }} state=directory owner={{ deploy_web_user }} group={{ deploy_web_group }} recurse=yes
+
+    - name: Finalize the deploy, removing the unfinished file and switching the symlink
+      deploy_helper:
+        path: "{{ site_path }}"
+        release: "{{ deploy_helper.new_release }}"
+        state: finalize
+        clean: false
+        keep_releases: 5

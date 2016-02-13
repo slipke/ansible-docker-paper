@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure('2') do |config|
+
+  # Staging machine
+  config.vm.define :staging do |staging_config|
+    staging_config.vm.box = 'ubuntu/trusty64'
+
+    staging_config.vm.network :private_network, ip: '192.168.33.80'
+
+    staging_config.vm.provision 'ansible' do |ansible|
+      ansible.playbook = '../ansible/vagrant_staging.yml'
+    end
+  end
+
+  # Production machine
+  config.vm.define :production do |production_config|
+    production_config.vm.box = 'ubuntu/trusty64'
+
+    production_config.vm.network :private_network, ip: '192.168.33.81'
+
+    production_config.vm.provision 'ansible' do |ansible|
+      ansible.playbook = '../ansible/vagrant_production.yml'
+    end
+  end
+end

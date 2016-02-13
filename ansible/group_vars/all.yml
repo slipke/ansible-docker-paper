@@ -1,0 +1,97 @@
+##################
+# Project settings
+##################
+project_name: "ansible-docker-paper"
+site_fqdn: "{{ project_name }}.de"
+
+base_path: "/var/www"
+site_path: "{{ base_path }}/{{ site_fqdn }}"
+
+db_name: "{{ project_name }}"
+db_host: "localhost"
+db_user: "symfony"
+db_password: "123456"
+db_root_password: "123456"
+
+############
+# Deployment
+############
+deploy_web_user: "www-data"
+deploy_web_group: "www-data"
+deploy_tmp_path: "/tmp/{{ site_fqdn }}"
+deploy_repository: "https://github.com/slipke/ansible-docker-paper.git"
+deploy_version: "master"
+deploy_archive_file: "archive.tar"
+deploy_code_dir: "code"
+deploy_composer_enabled: no
+deploy_cleanup_items: []
+deploy_shared_directories: []
+deploy_writeable_directories: []
+
+#####################
+# Additional packages
+#####################
+# geerlingguy.composer
+composer_path: /usr/local/bin/composer
+
+# geerlingguy.php
+php_webserver_daemon: "nginx"
+php_conf_path: "/etc/php5/fpm"
+php_extension_conf_path: "{{ php_conf_path }}/conf.d"
+php_enable_php_fpm: true
+php_packages:
+  - php5-apcu
+  - php5-cli
+  - php5-gd
+  - php5-curl
+  - php5-fpm
+  - php5-intl
+  - php5-geoip
+  - php5-mcrypt
+  - php5-redis
+  - php5-imagick
+  - php5-json
+  - php5-mysqlnd
+
+php_date_timezone: "Europe/Berlin"
+php_memory_limit: "512M"
+php_max_execution_time: "240"
+php_max_input_time: "120"
+php_max_input_vars: "2000"
+php_realpath_cache_size: "32K"
+php_upload_max_filesize: "50M"
+php_post_max_size: "50M"
+php_fpm_listen: "/var/run/php5-fpm.sock"
+php_fpm_listen_allowed_clients: "127.0.0.1"
+
+# geerlingguy.mysql
+mysql_root_password_update: yes
+mysql_root_password: "{{ db_root_password }}"
+mysql_databases:
+  - name: "{{ db_name }}"
+mysql_users:
+  - name: "{{ db_user }}"
+    host: "localhost"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL,GRANT"
+
+nginx_vhosts:
+  - listen: "80 default_server"
+    server_name: "{{ site_fqdn }}"
+    root: "{{ site_path }}/current/web"
+    index: "index.php index.html index.htm"
+    extra_parameters: |
+      location / {
+        try_files $uri /app.php$is_args$args;
+      }
+      # DEV
+      # This rule should only be placed on your development environment
+      # In production, don't include this and don't deploy app_dev.php or config.php
+      location ~ ^/(app_dev|config)\.php(/|$) {
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+      }
+nginx_remove_default_vhost: yes
