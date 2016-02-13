@@ -28,7 +28,7 @@
       unarchive: src={{ deploy_tmp_path }}/{{ deploy_archive_file }} dest={{ deploy_helper.new_release_path }} copy=no
 
     - name: Install dependencies with composer
-      composer: command=install working_dir={{ deploy_helper.new_release_path }}
+      shell: "{{ composer_path }} install --working-dir={{ deploy_helper.new_release_path }} --no-interaction"
       when: deploy_composer_enabled
 
     - name: Remove tmp dir
