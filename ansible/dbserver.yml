@@ -1,0 +1,5 @@
+---
+- hosts: dbserver
+  become: yes
+  roles:
+    - { role: geerlingguy.mysql, tags: mysql }

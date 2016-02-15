@@ -104,3 +104,10 @@ nginx_vhosts:
         internal;
       }
 nginx_remove_default_vhost: yes
+
+# angstwad.docker_ubuntu
+docker_group_members:
+  - vagrant
+docker_opts: >
+  -H unix://
+  -H tcp://0.0.0.0:2375

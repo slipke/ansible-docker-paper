@@ -9,6 +9,3 @@
 
 # Vagrant
 /test/.vagrant/
-
-# Ansible
-/ansible/roles/

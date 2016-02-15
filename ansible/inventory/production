@@ -1,4 +1,7 @@
-production.ansible-docker-paper.de ansible_ssh_host=192.168.33.81 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='/Users/simonlipke/Documents/ansible-docker-paper/test/.vagrant/machines/production/virtualbox/private_key'
+192.168.33.201 ansible_user=vagrant ansible_ssh_pass=vagrant
 
-[production]
-production.ansible-docker-paper.de
+[docker]
+192.168.33.201
+
+[service]
+192.168.33.201
