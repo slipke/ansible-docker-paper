@@ -1,4 +1,4 @@
 ---
 - hosts: service
-  role:
+  roles:
     - { role: slipke.service, tags: service }
