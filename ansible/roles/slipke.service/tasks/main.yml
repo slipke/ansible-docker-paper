@@ -1,0 +1,30 @@
+---
+- name: Install application data container
+  docker:
+    name: application
+    image: slipke/ansible-docker-paper-application
+    state: present
+    pull: always
+
+- name: Install php container
+  docker:
+    name: php
+    image: php:5.5-fpm
+    expose:
+      - 9000
+    volumes_from:
+      - application
+    state: started
+
+- name: Install frontend container
+  docker:
+    name: frontend
+    image: slipke/ansible-docker-paper-frontend
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - php:php
+    volumes_from:
+      - application
+    state: started

@@ -1,7 +1,0 @@
-192.168.33.200 ansible_user=vagrant ansible_ssh_pass=vagrant
-
-[webserver]
-192.168.33.200
-
-[dbserver]
-192.168.33.200

@@ -1,9 +1,0 @@
----
-- hosts: webserver
-  become: yes
-  roles:
-    - { role: geerlingguy.nginx, tags: nginx }
-    - { role: geerlingguy.php, tags: php }
-    - { role: geerlingguy.ntp, tags: ntp }
-    - { role: geerlingguy.git, tags: git }
-    - { role: geerlingguy.composer, tags: composer }

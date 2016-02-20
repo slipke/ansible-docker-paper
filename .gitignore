@@ -1,11 +1,5 @@
 # IDE
 .idea/
 
-# Code
-#/code/
-
-# Docker
-/docker/logs/
-
 # Vagrant
-/test/.vagrant/
+.vagrant/

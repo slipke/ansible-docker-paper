@@ -1,27 +1,3 @@
-# MySQL
-- src: geerlingguy.mysql
-  version: 1.9.1
-
-# Composer
-- src: geerlingguy.composer
-  version: 1.2.7
-
-# NTP
-- src: geerlingguy.ntp
-  version: 1.0.4
-
-# PHP
-- src: geerlingguy.php
-  version: 1.8.2
-
-# nginx
-- src: geerlingguy.nginx
-  version: 1.5.1
-
 # docker-engine
 - src: angstwad.docker_ubuntu
   version: v1.1.1
-
-# git
-- src: geerlingguy.git
-  version: 1.0.6
