@@ -1,3 +1,6 @@
-*
-!.gitignore
+# Ignore all installed roles in this folder
+/*/
+!/.gitignore
+
+# Don't ignore our own custom role
 !/slipke.service/
