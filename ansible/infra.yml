@@ -1,4 +1,6 @@
 ---
 # This is just a shortcut for our main infrstructure
+# Use this playbook to provision the production server and
+# deploy the application
 - include: docker.yml
 - include: service.yml

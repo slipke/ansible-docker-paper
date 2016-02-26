@@ -1,4 +1,7 @@
 ---
+# This playbook is used to deploy the application created in
+# the paper. The deployment is covered in the role slipke.service, so
+# we just call the role here
 - hosts: service
   roles:
     - { role: slipke.service, tags: service }

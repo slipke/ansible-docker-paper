@@ -1,4 +1,8 @@
 ---
+# This playbok is used to install docker-engine and all needed
+# dependencies on the production host. All this is covered by the role
+# angstwad.docker_ubuntu, so we just call this role here (and tell it to
+# do this as sudo)
 - hosts: docker
   become: yes
   roles:

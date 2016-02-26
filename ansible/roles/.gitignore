@@ -1,4 +1,4 @@
-# Ignore all installed roles in this folder
+# Ignore all installed roles in this folder, except .gitignore
 /*/
 !/.gitignore
 

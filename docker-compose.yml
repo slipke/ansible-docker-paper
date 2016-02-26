@@ -1,10 +1,15 @@
+# We use version 2
 version: '2'
 services:
+  # The application container mounts the code folder into /var/www/symfony
+  # and builds from docker/application/.
   application:
     build: docker/application/
     volumes:
       - ./code:/var/www/symfony
 
+  # The PHP container uses images from the application container and exposes port
+  # 9000 to other docker containers.
   php:
     build: docker/php/
     expose:
@@ -14,11 +19,13 @@ services:
     depends_on:
       - application
 
+  # The frontend container builds from the Dockerfile in docker/frontend and exposes port
+  # 80. It also links to the php container and uses the volumes mounted in our application
+  # container.
   frontend:
     build: docker/frontend/
     ports:
       - 80:80
-      - 443:443
     links:
       - php
     depends_on:
@@ -26,5 +33,3 @@ services:
       - application
     volumes_from:
       - application
-    volumes:
-      - ./docker/logs/frontend/:/var/log/nginx

@@ -1,3 +1,10 @@
+# This inventory file contains our productions hosts.
+# For this paper we only got our production vagrant machine here.
+# The production vagrant machine is put into the group docker and service.
+# To add more hosts, just put enter the IPs in here and put them into the
+# needed groups.
+
+# Vagrant uses vagrant:vagrant as default login & passwordless sudo
 192.168.33.201 ansible_user=vagrant ansible_ssh_pass=vagrant
 
 [docker]

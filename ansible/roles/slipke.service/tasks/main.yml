@@ -1,4 +1,9 @@
 ---
+# This playbook is used to deploy our docker containers
+# It pulls the images from the docker hub and makes sure
+# they are started
+
+# Install & start the application data container (with our application in /var/www/symfony)
 - name: Install application data container
   docker:
     name: application
@@ -6,6 +11,8 @@
     state: present
     pull: always
 
+# Install the PHP-Container, open port 9000 for other services
+# and use the volume from the application container
 - name: Install php container
   docker:
     name: php
@@ -16,13 +23,14 @@
       - application
     state: started
 
+# Install and start the frontend container. nginx is used as base image,
+# port 80 is opened to public
 - name: Install frontend container
   docker:
     name: frontend
     image: slipke/ansible-docker-paper-frontend
     ports:
       - 80:80
-      - 443:443
     links:
       - php:php
     volumes_from:

@@ -1,7 +1,1 @@
 site_fqdn: "production.{{ project_name }}.de"
-
-db_name: "{{ project_name }}"
-db_host: "localhost"
-db_user: "symfony"
-db_password: "123456"
-db_root_password: "123456"
