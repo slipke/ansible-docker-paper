@@ -11,3 +11,6 @@ Produktionsserver zu deployen. Dadurch entsteht eine solide Grundlage für die s
 Produktionsumgebung. Um den Container zu erstellen wird die Plattform Docker in der aktuellen Version genutzt. 
 Im Anschluss werden kurz weitere Tools vorgestellt, mit welchen die Produktionsumgebung weiter optimier werden kann.
 
+# Aufbau
+
+![Aufbau](Aufbau.jpg)
