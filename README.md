@@ -14,3 +14,11 @@ Im Anschluss werden kurz weitere Tools vorgestellt, mit welchen die Produktionsu
 # Aufbau
 
 ![Aufbau](Aufbau.jpg)
+
+# Autor
+
+Name: Simon Lipke
+
+E-Mail: sl110@hdm-stuttgart.de
+
+Hochschule: [Hochschule der Medien](https://www.hdm-stuttgart.de)
