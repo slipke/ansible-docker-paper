@@ -9,7 +9,7 @@ lokalen Entwicklungsumgebung erstellt, in einen Docker-Container verpackt und in
 Es wird die Plattform Ansible verwendet, um die Produktionsumgebung automatisiert aufzusetzen und die Anwendung auf den 
 Produktionsserver zu deployen. Dadurch entsteht eine solide Grundlage für die spätere Erweiterung und Skalierung der 
 Produktionsumgebung. Um den Container zu erstellen wird die Plattform Docker in der aktuellen Version genutzt. 
-Im Anschluss werden kurz weitere Tools vorgestellt, mit welchen die Produktionsumgebung weiter optimier werden kann.
+Im Anschluss werden kurz weitere Tools vorgestellt, mit welchen die Produktionsumgebung weiter optimiert werden kann.
 
 # Aufbau
 
